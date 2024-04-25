@@ -1,53 +1,12 @@
-import { gql } from "@apollo/client";
-import { getClient } from "@/components/helpers/apollo-clients";
-
-const GET_DATA = gql`
-  query GameQuery {
-    games {
-      title
-      platform
-      id
-      reviews {
-        author {
-          id
-          name
-          reviews {
-            author {
-              id
-              name
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-const Home = async () => {
-  const client = getClient();
-  const { data } = await client.query({
-    query: GET_DATA,
-  });
-
-  console.log("data", data);
-
+import PageLayout from "@/components/PageLayout";
+const Home = () => {
   return (
-    <div className="w-full p-4">
-      <h1 className="mb-2">Sample Page</h1>
-      {data?.games?.map((game: any) => (
-        <div key={game.id} className="mb-6">
-          <h2>Game Title : {game.title}</h2>
-          <p>Platform : {game.platform}</p>
-          Reviewers:{" "}
-          <ul>
-            {game.reviews.map((review: any) => (
-              <li key={review.author.id}>
-                <h3>{review.author.name}</h3>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
+    <PageLayout>
+      <div className="flex flex-col items-center justify-center h-full">
+        <h1 className="text-3xl font-bold">Home</h1>
+        <p className="text-lg">Welcome to the home page</p>
+      </div>
+    </PageLayout>
   );
 };
 
