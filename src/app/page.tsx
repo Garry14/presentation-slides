@@ -1,7 +1,7 @@
 import PageLayout from "@/components/PageLayout";
 const Home = () => {
   return (
-    <PageLayout>
+    <PageLayout nextUrl="slide2">
       <div className="pt-[125px] px-[78px]">
         <h1 className="text-[100px] font-mono tracking-tighter leading-tight">GraphQL</h1>
         <h2 className="text-[95px] font-mono tracking-tighter">Untuk Frontend</h2>
