@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
+import NextPage from "./icons/NextPage";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -17,11 +18,19 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       <div className="rounded-lg bg-blue-900 h-full w-full">
         {children}
         <div className="absolute w-full bottom-[35px] left-0 flex justify-between items-center p-[50px]">
-          <div className="">
-            {prevUrl !== undefined && <Link href={prevUrl}>Prev</Link>}
+          <div className="rotate-180">
+            {prevUrl !== undefined && (
+              <Link href={prevUrl}>
+                <NextPage />
+              </Link>
+            )}
           </div>
           <div className="">
-            {nextUrl !== undefined && <Link href={nextUrl}>Next</Link>}
+            {nextUrl !== undefined && (
+              <Link href={nextUrl}>
+                <NextPage />
+              </Link>
+            )}
           </div>
         </div>
       </div>
