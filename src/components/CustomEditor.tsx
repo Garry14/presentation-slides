@@ -96,10 +96,13 @@ const CustomEditor = () => {
       <div className="w-1/2 p-4">
         <div className="mb-[14px]">
           <button
-            className="h-[45px] w-[100px] bg-blue-500 rounded-sm"
+            className={`h-[45px] w-[100px] ${
+              isLoading ? "bg-blue-800" : "bg-blue-500"
+            } rounded-sm`}
             onClick={runCode}
+            disabled={isLoading}
           >
-            Run Code
+            {isLoading ? "Running..." : "Run Code"}
           </button>
         </div>
         <div className="mb-[14px]">Output</div>

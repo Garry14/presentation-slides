@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import CustomEditorTwo from "@/components/CustomEditorTwo";
+import CustomEditor from "@/components/CustomEditor";
 
 const TestEditor = () => {
-  return <CustomEditorTwo />;
+  return <CustomEditor />;
 };
 
 export default TestEditor;

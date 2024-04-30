@@ -23,14 +23,15 @@ const CustomEditorTwo = () => {
           },
         }
       );
-      console.log(editorRef.current, "editorRef.current");
+      editorRef.current.dispose();
     }
 
-    return () => {
-      if (editorRef.current) {
-        editorRef.current.dispose();
-      }
-    };
+    // return () => {
+    //   if (editorRef.current) {
+    //     console.log(editorRef.current, "editorRef.current", editorRef.current.dispose);
+    //     editorRef.current.dispose();
+    //   }
+    // };
   }, [editorRef]);
 
   return (
