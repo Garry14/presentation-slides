@@ -1,41 +1,46 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState } from "react";
+import Monaco from "@monaco-editor/react";
 
 const CustomEditorTwo = () => {
-  const editorRef = useRef(null);
+  const [activeTab, setActiveTab] = useState(0);
+  const [tabContent, setTabContent] = useState([
+    "// Content of Tab 1",
+    "// Content of Tab 2",
+  ]);
 
-  useEffect(() => {
-    console.log("Editor component mounted");
-    if (typeof window !== "undefined" && !editorRef.current) {
-      console.log("Editor component mounted window");
-      const monaco = require("monaco-editor");
-      console.log(monaco, "monaco");
-      editorRef.current = monaco.editor.create(
-        document.getElementById("editor-container"),
-        {
-          value: "// Type your React code here",
-          language: "javascript", // or 'typescript'
-          automaticLayout: true,
-          minimap: {
-            enabled: false, // Disable minimap to improve performance
-          },
-          scrollbar: {
-            alwaysConsumeMouseWheel: false, // Allow page scrolling with mouse wheel
-          },
-        }
-      );
-      editorRef.current.dispose();
-    }
+  const handleTabChange = (index) => {
+    setActiveTab(index);
+  };
 
-    // return () => {
-    //   if (editorRef.current) {
-    //     console.log(editorRef.current, "editorRef.current", editorRef.current.dispose);
-    //     editorRef.current.dispose();
-    //   }
-    // };
-  }, [editorRef]);
+  const handleContentChange = (index, value) => {
+    const newTabContent = [...tabContent];
+    newTabContent[index] = value;
+    setTabContent(newTabContent);
+  };
 
   return (
-    <div id="editor-container" style={{ width: "100%", height: "400px" }} />
+    <div>
+      <div>
+        {tabContent.map((content, index) => (
+          <button key={index} onClick={() => handleTabChange(index)}>{`Tab ${
+            index + 1
+          }`}</button>
+        ))}
+      </div>
+      {tabContent.map((content, index) => (
+        <div
+          key={index}
+          style={{ display: index === activeTab ? "block" : "none" }}
+        >
+          <Monaco
+            height="500px"
+            language="javascript"
+            value={tabContent[index]}
+            onChange={(value) => handleContentChange(index, value)}
+          />
+        </div>
+      ))}
+    </div>
   );
 };
 
